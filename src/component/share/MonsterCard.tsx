@@ -1,20 +1,21 @@
 import React from "react";
-import type { Monster, SpellCardType } from "../hook/GameLogic";
+import type { Monster, SpellCardType } from "../../type/type";
 
-import "./MonsterCard.css"
-
+import "./MonsterCard.css";
 
 type MonsterCardProps = {
   monster: Monster;
   size?: "small" | "normal";
 };
 
-export default function MonsterCard({monster}: MonsterCardProps) {
+export default function MonsterCard({ monster }: MonsterCardProps) {
   return (
     <div className={"monster-card"} data-type={monster.type.toLowerCase()}>
       <header className="monster-card-header">
         <span className="monster-type">{monster.type}</span>
-        <span className="monster-health">❤️ {monster.HP} / {monster.maxHP}</span>
+        <span className="monster-health">
+          ❤️ {monster.HP} / {monster.maxHP}
+        </span>
       </header>
 
       <div className="monster-card-body">
@@ -29,18 +30,21 @@ export default function MonsterCard({monster}: MonsterCardProps) {
   );
 }
 
-
-function lootContainer(loot:Monster["loot"]){
+function lootContainer(loot: Monster["loot"]) {
   const lootItems = [];
 
-  if(loot.gold > 0){
+  if (loot.gold > 0) {
     lootItems.push(<LootItem key="gold" type="gold" value={loot.gold} />);
   }
-  if(loot.manaStone > 0){
-    lootItems.push(<LootItem key="manaStone" type="manaStone" value={loot.manaStone} />);
+  if (loot.manaStone > 0) {
+    lootItems.push(
+      <LootItem key="manaStone" type="manaStone" value={loot.manaStone} />
+    );
   }
-  if(loot.spellCards !== null){
-    lootItems.push(<LootItem key="spellCards" type="spellCards" value={loot.spellCards} />);
+  if (loot.spellCards !== null) {
+    lootItems.push(
+      <LootItem key="spellCards" type="spellCards" value={loot.spellCards} />
+    );
   }
 
   return (
@@ -62,39 +66,42 @@ function LootItem({ type, value }: { type: string; value: number | string }) {
   const lootConfig = {
     gold: { icon: "/src/assets/gold.png", label: "" },
     manaStone: { icon: "/src/assets/manaStone.png", label: "" },
-    spellCards: { icon: "/src/assets/spellCards.png", label: "" }
+    spellCards: { icon: "/src/assets/spellCards.png", label: "" },
   };
 
   const spellCardIcons: Record<SpellCardType, string> = {
-    "冰凍法術": "/src/assets/spell/spell_ice.png",
-    "爆裂法術": "/src/assets/spell/spell_boom.png", 
-    "毒藥法術": "/src/assets/spell/spell_poison.png"
+    冰凍法術: "../../src/assets/spell/spell_ice.png",
+    爆裂法術: "../../src/assets/spell/spell_boom.png",
+    毒藥法術: "../../src/assets/spell/spell_poison.png",
   };
-  
+
   const config = lootConfig[type as keyof typeof lootConfig];
   if (!config) return null;
 
   // 如果是法術卡，使用對應的法術圖示
-  const iconSrc = type === "spellCards" && typeof value === "string" 
-    ? spellCardIcons[value as SpellCardType]
-    : config.icon;
+  const iconSrc =
+    type === "spellCards" && typeof value === "string"
+      ? spellCardIcons[value as SpellCardType]
+      : config.icon;
 
   // 根據 value 的數值重複顯示圖示
   const items = [];
-  const count = typeof value === 'number' ? value : 1;
-  
+  const count = typeof value === "number" ? value : 1;
+
   for (let i = 0; i < count; i++) {
     items.push(
-      <img 
+      <img
         key={i}
-        src={iconSrc} 
-        alt={config.label} 
-        style={{ width: "32px", height: "32px" }} 
+        src={iconSrc}
+        alt={config.label}
+        style={{ width: "32px", height: "32px" }}
       />
     );
   }
 
-  return <div className="LootItem" style={{ display: "flex", gap: "4px" }}>{items}</div>;
+  return (
+    <div className="LootItem" style={{ display: "flex", gap: "4px" }}>
+      {items}
+    </div>
+  );
 }
-
-
