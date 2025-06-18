@@ -1,0 +1,7 @@
+.player-container {
+grid-template-rows: repeat(6, 1fr);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 8px;
+}

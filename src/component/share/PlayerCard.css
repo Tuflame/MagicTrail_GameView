@@ -1,0 +1,63 @@
+.player-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  background-color: #f9f9f9;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.player-header {
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  font-weight: bold;
+  color: black;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.player-header .id,
+.player-header .name,
+.player-header .gold {
+  display: flex;
+  flex-direction: column; /* 讓文字上下排列 */
+  justify-content: center; /* 垂直置中 */
+  text-align: center; /* 多行也置中 */
+  flex: 1;
+}
+
+.player-attributes {
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.attribute {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.water {
+  background-color: darkblue;
+}
+
+.fire {
+  background-color: red;
+}
+
+.wood {
+  background-color: forestgreen;
+}
