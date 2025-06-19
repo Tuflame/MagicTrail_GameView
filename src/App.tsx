@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 import type { GameState } from "./type/type";
 
@@ -150,6 +150,10 @@ export default function GameView() {
   const [connected, setConnected] = useState(false);
   const wsRef = useRef<WebSocket | null>(null);
   const [gameState, setGameState] = useState<GameState>(defaultGameState);
+
+  const [lastUpdate, setLastUpdate] = useState<number | null>(null);
+  const [secondsAgo, setSecondsAgo] = useState<number>(0);
+
   const handleConnect = () => {
     if (!serverUrl.startsWith("ws://") && !serverUrl.startsWith("wss://")) {
       alert(`\{${serverUrl}\}請輸入有效的 WebSocket 位址（ws:// 或 wss://）`);
@@ -166,8 +170,14 @@ export default function GameView() {
 
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
-      console.log(data);
-      setGameState(data);
+      // ✅ 儲存 GameState 與更新時間
+      if (data.payload) {
+        setGameState(data.payload);
+      }
+      if (data.timestamp) {
+        setLastUpdate(data.timestamp);
+        setSecondsAgo(0); // 重置秒數
+      }
     };
 
     ws.onerror = (err) => {
@@ -181,8 +191,38 @@ export default function GameView() {
     };
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (lastUpdate) {
+        const now = Date.now();
+        const diffInSeconds = Math.floor((now - lastUpdate) / 1000);
+        setSecondsAgo(diffInSeconds);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [lastUpdate]);
+  // ✅ 顯示時間格式
+  const formatTimestamp = (ts: number) => {
+    const date = new Date(ts);
+    return date.toLocaleString(); // 例如 "2025/6/19 下午 3:21:09"
+  };
+
   return (
     <>
+      {lastUpdate && (
+        <div
+          style={{
+            position: "absolute",
+            top: 8,
+            right: 12,
+            fontSize: 14,
+            color: "white",
+          }}
+        >
+          伺服器資料更新：{formatTimestamp(lastUpdate)} ⏱ 更新於：{secondsAgo}{" "}
+          秒前
+        </div>
+      )}
       {!connected && (
         <div className="coverModal">
           <div className="contain">
