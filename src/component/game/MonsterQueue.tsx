@@ -3,7 +3,6 @@ import type { Monster } from "../../type/type";
 import MonsterCard from "../share/MonsterCard";
 
 export function MonsterQueue({ monsters }: { monsters: Monster[] }) {
-  // 取得第 4~6 隻怪物
   return (
     <div className="monsterqueue-grid">
       <div className="section-header">
