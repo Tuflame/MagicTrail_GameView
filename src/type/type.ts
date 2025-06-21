@@ -1,16 +1,14 @@
-export type ElementType = "火" | "水" | "木" | "無";
-export type SpellCardType = "冰凍法術" | "爆裂法術" | "毒藥法術";
-export type AttackCardType = "魔法棒" | SpellCardType;
-export type GamePhase = "事件" | "準備" | "行動" | "結算";
+type GamePhase = "遊戲開始" | "事件" | "準備" | "行動" | "結算";
 
-export type Player = {
+type ElementType = "火" | "水" | "木" | "無";
+type PlayerElementType = Exclude<ElementType, "無">;
+type SpellCardType = "冰凍法術" | "爆裂法術" | "毒藥法術";
+type AttackCardType = "魔法棒" | SpellCardType;
+
+type Player = {
   id: number;
   name: string;
-  attack: {
-    火: number;
-    水: number;
-    木: number;
-  };
+  attack: Record<PlayerElementType, number>;
   loot: {
     gold: number;
     manaStone: number;
@@ -18,7 +16,14 @@ export type Player = {
   };
 };
 
-export type Monster = {
+type Skill = {
+  name: string;
+  description: string;
+  trigger: "onAppear" | "onHit" | "onTurnStart" | "onTurnEnd";
+  applyEffect: () => void;
+};
+
+type Monster = {
   maxHP: number;
   HP: number;
   name: string;
@@ -28,59 +33,64 @@ export type Monster = {
     manaStone: number;
     spellCards: SpellCardType | null;
   };
-  imageUrl?: string;
+  imageUrl: string | null;
+  skill?: Skill[];
 };
 
-export type BattleFieldMonster = {
-  index: number;
-  moster: Monster;
+type BattleFieldSlot = {
+  monster: Monster | null;
+  id: "A" | "B" | "C";
   poisonedBy: number[] | null;
   lastIcedBy: number | null;
 };
 
-export type BattleFieldSlot = BattleFieldMonster | null;
-
-export type BattleLog = {
-  turn: number;
-  message: string;
-};
-
-export type EventEffect = {
+type EventEffect = {
   description: string;
   weighted?: number;
   applyEffect: () => void;
 };
 
-export type GameEvent = {
+type GameEvent = {
   name: string;
-  description: string;
-  weighted: number;
-  effects?: EventEffect | EventEffect[];
+  weighted?: number;
+  effects: EventEffect | EventEffect[];
 };
 
-export type AttackAction = {
-  playerId: number;
-  battleFieldIndex: 0 | 1 | 2;
+type AttackAction = {
+  player: Player;
+  battlefieldId: "A" | "B" | "C";
   cardType: AttackCardType;
-  element?: ElementType; // 僅魔法棒需要
-  power?: number; // 僅魔法棒需要（例如基礎攻擊力）
+  element?: PlayerElementType;
 };
 
 type GameLog = {
   round: number;
-  messege: string;
+  message: string;
 };
 
-export type GameState = {
+type GameState = {
   turn: number;
   phase: GamePhase;
   players: Player[];
-  battlefieldmonster: [
-    BattleFieldMonster | null,
-    BattleFieldMonster | null,
-    BattleFieldMonster | null
-  ];
+  battlefieldmonster: [BattleFieldSlot, BattleFieldSlot, BattleFieldSlot];
   queuemonsters: Monster[];
   event: GameEvent;
   log: GameLog[];
+};
+
+export type {
+  GameState,
+  GameEvent,
+  AttackAction,
+  Player,
+  Monster,
+  Skill,
+  ElementType,
+  PlayerElementType,
+  SpellCardType,
+  AttackCardType,
+  GamePhase,
+  BattleFieldSlot,
+  EventEffect,
+  GameLog,
 };

@@ -9,151 +9,15 @@ import { EventCard } from "./component/game/EventCard";
 
 import "./App.css";
 
-const defaultGameState: GameState = {
-  turn: 1,
-  phase: "事件",
-  players: [
-    {
-      id: 1,
-      name: "Player 1",
-      attack: {
-        火: 1,
-        水: 1,
-        木: 1,
-      },
-      loot: {
-        gold: 0,
-        manaStone: 2,
-        spellCards: {
-          魔法棒: 1,
-          冰凍法術: 0,
-          爆裂法術: 0,
-          毒藥法術: 0,
-        },
-      },
-    },
-    {
-      id: 2,
-      name: "Player 2",
-      attack: {
-        火: 1,
-        水: 1,
-        木: 1,
-      },
-      loot: {
-        gold: 0,
-        manaStone: 2,
-        spellCards: {
-          魔法棒: 1,
-          冰凍法術: 0,
-          爆裂法術: 0,
-          毒藥法術: 0,
-        },
-      },
-    },
-    {
-      id: 3,
-      name: "Player 3",
-      attack: {
-        火: 1,
-        水: 1,
-        木: 1,
-      },
-      loot: {
-        gold: 0,
-        manaStone: 2,
-        spellCards: {
-          魔法棒: 1,
-          冰凍法術: 0,
-          爆裂法術: 0,
-          毒藥法術: 0,
-        },
-      },
-    },
-    {
-      id: 4,
-      name: "Player 4",
-      attack: {
-        火: 1,
-        水: 1,
-        木: 1,
-      },
-      loot: {
-        gold: 0,
-        manaStone: 2,
-        spellCards: {
-          魔法棒: 1,
-          冰凍法術: 0,
-          爆裂法術: 0,
-          毒藥法術: 0,
-        },
-      },
-    },
-    {
-      id: 5,
-      name: "Player 5",
-      attack: {
-        火: 1,
-        水: 1,
-        木: 1,
-      },
-      loot: {
-        gold: 0,
-        manaStone: 2,
-        spellCards: {
-          魔法棒: 1,
-          冰凍法術: 0,
-          爆裂法術: 0,
-          毒藥法術: 0,
-        },
-      },
-    },
-    {
-      id: 6,
-      name: "Player 6",
-      attack: {
-        火: 1,
-        水: 1,
-        木: 1,
-      },
-      loot: {
-        gold: 0,
-        manaStone: 2,
-        spellCards: {
-          魔法棒: 1,
-          冰凍法術: 0,
-          爆裂法術: 0,
-          毒藥法術: 0,
-        },
-      },
-    },
-  ],
-  battlefieldmonster: [null, null, null],
-  queuemonsters: [],
-  event: {
-    name: "無事件",
-    description: "本回合風平浪靜，什麼也沒發生。",
-    weighted: 3,
-    effects: {
-      description: "本回合風平浪靜，什麼也沒發生。",
-      applyEffect: () => {
-        console.log("本回合風平浪靜，什麼也沒發生。");
-        // 可設計 setPlayers(p => ...) 加值處理
-      },
-    },
-  },
-  log: [],
-};
-
 export default function GameView() {
   const [serverUrl, setServerUrl] = useState("");
   const [connected, setConnected] = useState(false);
   const wsRef = useRef<WebSocket | null>(null);
-  const [gameState, setGameState] = useState<GameState>(defaultGameState);
+  const [gameState, setGameState] = useState<GameState | null>(null);
 
   const [lastUpdate, setLastUpdate] = useState<number | null>(null);
   const [secondsAgo, setSecondsAgo] = useState<number>(0);
-
+  const [delay, setDelay] = useState<number>(0);
   const handleConnect = () => {
     if (!serverUrl.startsWith("ws://") && !serverUrl.startsWith("wss://")) {
       alert(`\{${serverUrl}\}請輸入有效的 WebSocket 位址（ws:// 或 wss://）`);
@@ -177,6 +41,7 @@ export default function GameView() {
       if (data.timestamp) {
         setLastUpdate(data.timestamp);
         setSecondsAgo(0); // 重置秒數
+        setDelay(Date.now() - data.timestamp); // 計算延遲
       }
     };
 
@@ -209,20 +74,6 @@ export default function GameView() {
 
   return (
     <>
-      {lastUpdate && (
-        <div
-          style={{
-            position: "absolute",
-            top: 8,
-            right: 12,
-            fontSize: 14,
-            color: "white",
-          }}
-        >
-          伺服器資料更新：{formatTimestamp(lastUpdate)} ⏱ 更新於：{secondsAgo}{" "}
-          秒前 延遲{Date.now() - lastUpdate}ms
-        </div>
-      )}
       {!connected && (
         <div className="coverModal">
           <div className="contain">
@@ -237,33 +88,51 @@ export default function GameView() {
           </div>
         </div>
       )}
-      <div className="main-container">
-        <div className="left-section">
-          <Order players={gameState.players} />
-        </div>
-        <div className="middle-section">
-          <div>
-            第{gameState.turn}回合 {gameState.phase}階段
-          </div>
-          <div className="battlefield-wrapper">
-            <Battlefield monsters={gameState.battlefieldmonster} />
-          </div>
-          <div className="queue-wrapper">
-            <MonsterQueue monsters={gameState.queuemonsters} />
-          </div>
-        </div>
 
-        <div className="right-section">
-          <div className="WorldEvent-wrapper">
-            {event ? (
-              <EventCard event={gameState.event} /> /* if 有 event 建立卡片*/
-            ) : (
-              <p>無事件資料</p> /* if 有 event 建立卡片*/
-            )}
-          </div>
-          <div className="log-wrapper"></div>
+      {connected && lastUpdate && (
+        <div
+          style={{
+            position: "absolute",
+            top: 8,
+            right: 12,
+            fontSize: 14,
+            color: "white",
+          }}
+        >
+          伺服器資料更新：{formatTimestamp(lastUpdate)} ⏱ 更新於：{secondsAgo}{" "}
+          秒前 延遲{delay}ms
         </div>
-      </div>
+      )}
+
+      {connected && gameState && (
+        <div className="main-container">
+          <div className="left-section">
+            <Order players={gameState.players} />
+          </div>
+          <div className="middle-section">
+            <div>
+              第{gameState.turn}回合 {gameState.phase}階段
+            </div>
+            <div className="battlefield-wrapper">
+              <Battlefield slots={gameState.battlefieldmonster} />
+            </div>
+            <div className="queue-wrapper">
+              <MonsterQueue monsters={gameState.queuemonsters} />
+            </div>
+          </div>
+
+          <div className="right-section">
+            <div className="WorldEvent-wrapper">
+              {event ? (
+                <EventCard event={gameState.event} /> /* if 有 event 建立卡片*/
+              ) : (
+                <p>無事件資料</p> /* if 有 event 建立卡片*/
+              )}
+            </div>
+            <div className="log-wrapper"></div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

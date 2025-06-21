@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Yusei+Magic&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Yusei+Magic&display=swap");
 :root {
   font-family: "Noto Sans TC", sans-serif;
   font-optical-sizing: auto;
@@ -15,7 +15,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-html,body {
+html,
+body {
   height: 100vh;
   margin: 0;
   display: flex;

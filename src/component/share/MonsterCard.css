@@ -1,10 +1,8 @@
-
-
 /* MonsterCard.css */
 
 .monster-card {
-  min-width: 70px; 
-  max-width: 275px; 
+  min-width: 70px;
+  max-width: 275px;
   aspect-ratio: 250/405;
   display: flex;
   flex: 1;
@@ -12,11 +10,10 @@
   flex-direction: column;
   background-color: #222;
   border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.7); 
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
   padding: 12px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-} 
-
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 
 .MonsterQueue-rowContainer > .monster-card {
   width: 150px !important;
@@ -24,16 +21,14 @@
   min-width: 150px;
   flex: 0 0 auto; /* 若父層是 flex，要防止它被拉長 */
   box-sizing: border-box; /* 避免 padding 撐爆寬度 */
-} 
-
+}
 
 .MonsterQueue-rowContainer {
-  display: flex;              /* 啟用 Flexbox */
-  flex-direction: row;        /* 水平排列 */
-  gap: 14px;                  /* 卡片間距 */
+  display: flex; /* 啟用 Flexbox */
+  flex-direction: row; /* 水平排列 */
+  gap: 14px; /* 卡片間距 */
   padding-bottom: 8px;
-} 
-
+}
 
 .monster-card[data-type="火"] {
   color: #e74c3c; /* 這會改變整個卡片文字顏色 */
@@ -51,7 +46,6 @@
   color: #bdc3c7;
 }
 
-
 .monster-card-header {
   display: flex;
   justify-content: space-between;
@@ -59,7 +53,6 @@
   font-weight: 600;
   margin-bottom: 8px;
 }
-
 
 .monster-health {
   color: #e74c3c;
@@ -89,4 +82,3 @@
   color: #95a5a6;
   min-height: 20px;
 }
-

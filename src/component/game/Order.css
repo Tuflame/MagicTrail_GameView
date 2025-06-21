@@ -1,5 +1,5 @@
 .player-container {
-grid-template-rows: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   display: flex;
   flex-direction: column;
   flex-grow: 1;

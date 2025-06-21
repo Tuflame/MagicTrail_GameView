@@ -1,5 +1,5 @@
 import "./MonsterQueue.css";
-import type { Monster } from "../hook/GameLogic";
+import type { Monster } from "../../type/type";
 import MonsterCard from "../share/MonsterCard";
 
 export function MonsterQueue({ monsters }: { monsters: Monster[] }) {

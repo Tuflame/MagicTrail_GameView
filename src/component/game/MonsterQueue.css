@@ -5,8 +5,8 @@
   padding: 12px;
   border-radius: 8px;
   user-select: none;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  overflow-x: hidden;     
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
 }
 
 .section-header {
@@ -18,5 +18,3 @@
   font-weight: 700;
   color: #f39c12;
 }
-
-

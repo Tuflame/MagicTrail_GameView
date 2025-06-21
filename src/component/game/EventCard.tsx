@@ -1,11 +1,12 @@
 import "./EventCard.css";
-import type { GameEvent } from "../../type/type";
+import type { GameEvent, EventEffect } from "../../type/type";
 
 type GameEventProps = {
   event: GameEvent;
 };
 
 export function EventCard({ event }: GameEventProps) {
+  const effect = event.effects as EventEffect;
   return (
     <div className={"Event-card"}>
       <header className="Event-card-header">
@@ -16,12 +17,7 @@ export function EventCard({ event }: GameEventProps) {
       </header>
 
       <div className="Event-card-body">
-        <div className="Event-image"></div>
-        {event?.description ? (
-          <h3 className="Event-description">{event.description}</h3>
-        ) : (
-          <p>無事件資料</p>
-        )}
+        <h3 className="Event-description">{effect.description}</h3>
       </div>
     </div>
   );
