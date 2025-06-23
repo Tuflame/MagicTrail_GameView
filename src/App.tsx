@@ -6,6 +6,7 @@ import { Battlefield } from "./component/game/Battlefield";
 import { MonsterQueue } from "./component/game/MonsterQueue";
 import { Order } from "./component/game/Order";
 import { EventCard } from "./component/game/EventCard";
+import { Log } from "./component/game/Log";
 
 import "./App.css";
 
@@ -129,7 +130,9 @@ export default function GameView() {
                 <p>無事件資料</p> /* if 有 event 建立卡片*/
               )}
             </div>
-            <div className="log-wrapper"></div>
+            <div className="log-wrapper">
+              <Log logs={gameState.log} />
+            </div>
           </div>
         </div>
       )}

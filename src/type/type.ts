@@ -1,4 +1,4 @@
-type GamePhase = "遊戲開始" | "事件" | "準備" | "行動" | "結算";
+type GamePhase = "準備開始遊戲" | "事件" | "準備" | "行動" | "結算";
 
 type ElementType = "火" | "水" | "木" | "無";
 type PlayerElementType = Exclude<ElementType, "無">;
@@ -53,7 +53,7 @@ type EventEffect = {
 type GameEvent = {
   name: string;
   weighted?: number;
-  effects: EventEffect | EventEffect[];
+  effects: [EventEffect, ...EventEffect[]];
 };
 
 type AttackAction = {
@@ -65,6 +65,7 @@ type AttackAction = {
 
 type GameLog = {
   round: number;
+  phase: GamePhase;
   message: string;
 };
 

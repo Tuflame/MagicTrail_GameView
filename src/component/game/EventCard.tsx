@@ -1,12 +1,12 @@
 import "./EventCard.css";
-import type { GameEvent, EventEffect } from "../../type/type";
+import type { GameEvent } from "../../type/type";
 
 type GameEventProps = {
   event: GameEvent;
 };
 
 export function EventCard({ event }: GameEventProps) {
-  const effect = event.effects as EventEffect;
+  const effect = event.effects[0];
   return (
     <div className={"Event-card"}>
       <header className="Event-card-header">
