@@ -21,7 +21,7 @@ export default function GameView() {
   const [delay, setDelay] = useState<number>(0);
   const handleConnect = () => {
     if (!serverUrl.startsWith("ws://") && !serverUrl.startsWith("wss://")) {
-      alert(`\{${serverUrl}\}請輸入有效的 WebSocket 位址（ws:// 或 wss://）`);
+      alert(`{${serverUrl}}請輸入有效的 WebSocket 位址（ws:// 或 wss://）`);
       return;
     }
 
@@ -98,8 +98,7 @@ export default function GameView() {
             right: 12,
             fontSize: 14,
             color: "white",
-          }}
-        >
+          }}>
           伺服器資料更新：{formatTimestamp(lastUpdate)} ⏱ 更新於：{secondsAgo}{" "}
           秒前 延遲{delay}ms
         </div>
@@ -111,8 +110,8 @@ export default function GameView() {
             <Order players={gameState.players} />
           </div>
           <div className="middle-section">
-            <div>
-              第{gameState.turn}回合 {gameState.phase}階段
+            <div className="RoundTitle">
+              第 {gameState.turn} 回合 {gameState.phase} 階段
             </div>
             <div className="battlefield-wrapper">
               <Battlefield slots={gameState.battlefieldmonster} />

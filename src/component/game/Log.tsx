@@ -1,5 +1,7 @@
 import type { GameLog } from "../../type/type";
 
+import "./Log.css";
+
 export function Log({ logs }: { logs: GameLog[] }) {
   return (
     <div className="log-grid">
@@ -10,9 +12,9 @@ export function Log({ logs }: { logs: GameLog[] }) {
         {logs.map((log, index) => (
           <div key={index} className="Log-row">
             <span className="Log-time">
-              {log.round}－{log.phase}:
+              {log.round} {log.phase} :
             </span>
-            <span className="Log-message">{log.message}</span>
+            <span className="Log-message"> {log.message}</span>
           </div>
         ))}
       </div>

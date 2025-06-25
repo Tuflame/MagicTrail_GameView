@@ -82,3 +82,28 @@
   color: #95a5a6;
   min-height: 20px;
 }
+
+.monster-skill {
+  color: #95a5a6;
+}
+
+.LootItem {
+  display: flex; /* 讓子元素水平排列 */
+  align-items: center; /* 垂直置中 */
+  gap: 4px; /* 元素之間的間距 */
+  font-size: 25px;
+}
+
+.battlefield-wrapper .LootIcon {
+  width: 60px;
+  height: 60px;
+}
+
+.monsterqueue-grid .LootIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.monsterqueue-grid .LootTimes {
+  display: none;
+}

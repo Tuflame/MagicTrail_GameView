@@ -134,7 +134,7 @@
 .log-wrapper {
   flex: 4;
   border-color: black;
-  background-color: #f9f9f98b;
+  background-color: #f9f9f983;
   border-radius: 8px;
   height: 500px;
   overflow-y: auto;
@@ -153,4 +153,9 @@
   display: flex; /* 水平排列 */
   gap: 15px; /* 元素間間距 */
   height: 100%;
+}
+
+.RoundTitle {
+  font-size: 25px;
+  color: aquamarine;
 }
