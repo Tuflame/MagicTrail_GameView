@@ -12,8 +12,7 @@
 
 .player-header {
   display: flex;
-  justify-content: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   font-weight: bold;
   color: black;
   margin-top: auto;
@@ -24,7 +23,7 @@
 .player-header .name,
 .player-header .gold {
   display: flex;
-  flex-direction: column; /* 讓文字上下排列 */
+  flex-direction: row; /* 讓文字上下排列 */
   justify-content: center; /* 垂直置中 */
   text-align: center; /* 多行也置中 */
   flex: 1;
@@ -60,4 +59,11 @@
 
 .wood {
   background-color: forestgreen;
+}
+
+img {
+  width: 35%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 12px;
 }

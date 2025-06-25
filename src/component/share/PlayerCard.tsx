@@ -2,6 +2,8 @@ import type { Player } from "../../type/type";
 
 import "./PlayerCard.css";
 
+import goldIcon from "../../assets/gold.png";
+
 type OrderProps = {
   player: Player;
 };
@@ -10,19 +12,10 @@ export default function PlayerCard({ player }: OrderProps) {
   return (
     <div className="player-card">
       <div className="player-header">
-        <div className="id">
-          組別
-          <br />
-          {player.id}
-        </div>
-        <div className="name">
-          隊名
-          <br />
-          {player.name}
-        </div>
+        <div className="id">第{player.id}組</div>
+        <div className="name">{player.name}</div>
         <div className="gold">
-          金幣
-          <br />
+          <img src={goldIcon} alt="gold" />
           {player.loot.gold}
         </div>
       </div>
