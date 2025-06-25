@@ -77,6 +77,8 @@ export const skillTable: Record<string, Skill> = {
   },
 };
 
+export const skillname = ["屬性輪轉", "恢復"];
+
 type Monster = {
   maxHP: number;
   HP: number;
