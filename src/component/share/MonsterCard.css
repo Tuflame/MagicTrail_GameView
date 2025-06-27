@@ -1,27 +1,17 @@
 /* MonsterCard.css */
 
 .monster-card {
-  min-width: 70px;
-  max-width: 275px;
-  aspect-ratio: 250/405;
+  max-width: 320px;
+  aspect-ratio: 25/35;
   display: flex;
-  flex: 1;
   justify-content: space-between;
   flex-direction: column;
   background-color: #222;
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
-  padding: 12px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 15px;
 }
 
-.MonsterQueue-rowContainer > .monster-card {
-  width: 150px !important;
-  max-width: 150px;
-  min-width: 150px;
-  flex: 0 0 auto; /* 若父層是 flex，要防止它被拉長 */
-  box-sizing: border-box; /* 避免 padding 撐爆寬度 */
-}
 
 .MonsterQueue-rowContainer {
   display: flex; /* 啟用 Flexbox */
@@ -92,6 +82,7 @@
   align-items: center; /* 垂直置中 */
   gap: 4px; /* 元素之間的間距 */
   font-size: 25px;
+  
 }
 
 .battlefield-wrapper .LootIcon {

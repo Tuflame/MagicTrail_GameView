@@ -98,7 +98,8 @@ export default function GameView() {
             right: 12,
             fontSize: 14,
             color: "white",
-          }}>
+          }}
+        >
           伺服器資料更新：{formatTimestamp(lastUpdate)} ⏱ 更新於：{secondsAgo}{" "}
           秒前 延遲{delay}ms
         </div>
@@ -110,9 +111,6 @@ export default function GameView() {
             <Order players={gameState.players} />
           </div>
           <div className="middle-section">
-            <div className="RoundTitle">
-              第 {gameState.turn} 回合 {gameState.phase} 階段
-            </div>
             <div className="battlefield-wrapper">
               <Battlefield slots={gameState.battlefieldmonster} />
             </div>
@@ -122,6 +120,9 @@ export default function GameView() {
           </div>
 
           <div className="right-section">
+            <div className="RoundTitle">
+              第 {gameState.turn} 回合 {gameState.phase}
+            </div>
             <div className="WorldEvent-wrapper">
               {event ? (
                 <EventCard event={gameState.event} /> /* if 有 event 建立卡片*/

@@ -4,6 +4,8 @@
   justify-content: space-evenly;
 }
 
+
+
 .battlefield-rowContainer {
   display: flex; /* 啟用 Flexbox */
   flex-direction: row; /* 水平排列（預設就是 row） */
@@ -11,6 +13,12 @@
   gap: 16px; /* 每個卡片的間距，可依需求調整 */
   overflow-x: auto; /* 如果超出寬度，自動顯示橫向捲軸 */
   padding: 16px 8px; /* 上下留點空間 */
+  justify-content: space-evenly;
 }
 
-
+.battlefield-rowContainer{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  padding: 5px;
+  gap: 30px;
+}
