@@ -1,15 +1,15 @@
 .Log-rowContainer {
-  padding: 0 20px 0 20px; /* 或你想要的間距，例如 8px、24px 等 */
+  padding: 0 5px; /* 或你想要的間距，例如 8px、24px 等 */
 }
 
 .Log-time {
-  color: black;
-  font-size: 25px;
+  color: rgb(27, 27, 27);
+  font-size: 18px;
   font-weight: 600;
 }
 
 .Log-message {
-  color: rebeccapurple;
-  font-size: 25px;
+  color: rgb(0, 0, 0);
+  font-size: 18px;
   font-weight: 600;
 }

@@ -24,8 +24,8 @@
 
 .contain h2 {
   font-size: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .contain input {
@@ -67,6 +67,7 @@
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   overflow-y: hidden;
+  text-align: center;
 }
 
 /* 左邊固定寬度 */
@@ -85,7 +86,6 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  height: 100%;
 }
 
 /* 中間自動撐滿剩下空間 */
@@ -133,8 +133,8 @@
 /* 隊列固定高度 */
 .log-wrapper {
   flex: 4;
-  border-color: black;
-  background-color: #f9f9f983;
+  /* border-color: black;
+  background-color: #f9f9f983; */
   border-radius: 8px;
   height: 500px;
   overflow-y: auto;
