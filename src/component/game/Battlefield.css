@@ -4,8 +4,6 @@
   justify-content: space-evenly;
 }
 
-
-
 .battlefield-rowContainer {
   display: flex; /* 啟用 Flexbox */
   flex-direction: row; /* 水平排列（預設就是 row） */
@@ -16,9 +14,11 @@
   justify-content: space-evenly;
 }
 
-.battlefield-rowContainer{
+.battlefield-rowContainer {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   padding: 5px;
   gap: 30px;
+  justify-content: space-evenly;
+  overflow-x: auto;
 }

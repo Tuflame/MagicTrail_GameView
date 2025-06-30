@@ -84,7 +84,7 @@ function LootItem({ type, value }: { type: string; value: number | string }) {
 
   const spellCardIcons: Record<SpellCardType, string> = {
     冰凍法術: spellIceIcon,
-    爆裂法術: spellBoomIcon,
+    炸彈法術: spellBoomIcon,
     毒藥法術: spellPoisonIcon,
   };
 

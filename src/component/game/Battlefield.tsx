@@ -17,7 +17,7 @@ export function Battlefield({
           slot.monster ? (
             <MonsterCard key={index} monster={slot.monster} />
           ) : (
-            <div key={index} className="monster-slot empty">
+            <div key={index} className="monster-card empty">
               （空）
             </div>
           )

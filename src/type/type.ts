@@ -2,7 +2,7 @@ type GamePhase = "準備開始遊戲" | "事件" | "準備" | "行動" | "結算
 
 type ElementType = "火" | "水" | "木" | "無";
 type PlayerElementType = Exclude<ElementType, "無">;
-type SpellCardType = "冰凍法術" | "爆裂法術" | "毒藥法術";
+type SpellCardType = "冰凍法術" | "炸彈法術" | "毒藥法術";
 type AttackCardType = "魔法棒" | SpellCardType;
 
 type Player = {
